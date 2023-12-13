@@ -2,6 +2,8 @@ package pairmatching.domain;
 
 import static pairmatching.domain.Level.*;
 
+import java.util.Arrays;
+
 public enum Mission {
     CAR_RACE("자동차경주", LEVEL1),
     LOTTO("로또", LEVEL1),
@@ -12,12 +14,21 @@ public enum Mission {
     ENHANCEMENT("성능개선", LEVEL4),
     PUBLISH("배포", LEVEL4);
 
+    private static final String NO_SUCH_MISSION_MESSAGE = "[ERROR] 해당하는 미션을 찾을 수 없습니다";
     private String name;
     private Level level;
 
     Mission(String name, Level level) {
         this.name = name;
         this.level = level;
+    }
+
+    public static Mission from(String name, Level level) {
+        return Arrays.stream(Mission.values())
+                .filter(name::equals)
+                .filter(level::equals)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_MISSION_MESSAGE));
     }
 
     public String getName() {
