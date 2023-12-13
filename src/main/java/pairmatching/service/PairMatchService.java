@@ -36,6 +36,15 @@ public class PairMatchService {
         return PairsDto.from(result);
     }
 
+    public PairsDto findPairs(Procedure procedure) {
+        Pairs pairs = pairMatchingRepository.findByProcedure(procedure);
+        return PairsDto.from(pairs);
+    }
+
+    public void resetPairs() {
+        pairMatchingRepository.resetPairs();
+    }
+
     private List<String> mapToNames(List<Crew> crews) {
         return crews.stream()
                 .map(Crew::getName)
