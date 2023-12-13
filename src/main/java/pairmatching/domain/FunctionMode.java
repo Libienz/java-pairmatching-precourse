@@ -19,7 +19,7 @@ public enum FunctionMode {
 
     public static FunctionMode from(String code) {
         return Arrays.stream(FunctionMode.values())
-                .filter(code::equals)
+                .filter(functionMode -> functionMode.code.equals(code))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_FUNCTION_MESSAGE));
     }
