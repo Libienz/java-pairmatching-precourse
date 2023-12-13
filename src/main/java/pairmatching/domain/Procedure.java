@@ -27,4 +27,12 @@ public class Procedure {
     public int hashCode() {
         return Objects.hash(course, mission);
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Mission getMission() {
+        return mission;
+    }
 }
