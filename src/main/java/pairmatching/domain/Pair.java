@@ -16,4 +16,10 @@ public class Pair {
     public void addPair(String name) {
         pair.add(name);
     }
+
+    public int countSameCrew(Pair target) {
+        return (int) pair.stream()
+                .filter(target.pair::contains)
+                .count();
+    }
 }
