@@ -7,6 +7,7 @@ import pairmatching.domain.FunctionMode;
 import pairmatching.domain.Level;
 import pairmatching.domain.Mission;
 import pairmatching.domain.Procedure;
+import pairmatching.domain.RematchConfirm;
 
 public class InputMapper {
     private static final String INVALID_FORM_MESSAGE = "[ERROR] 입력 폼이 올바르지 않습니다";
@@ -14,6 +15,10 @@ public class InputMapper {
 
     public FunctionMode mapToFunctionMode(String input) {
         return FunctionMode.from(input);
+    }
+
+    public RematchConfirm mapToRematch(String input) {
+        return RematchConfirm.from(input);
     }
 
     public Procedure mapToProcedure(String input) {

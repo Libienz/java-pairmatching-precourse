@@ -2,6 +2,7 @@ package pairmatching.controller;
 
 import pairmatching.domain.FunctionMode;
 import pairmatching.domain.Procedure;
+import pairmatching.domain.RematchConfirm;
 import pairmatching.dto.PairsDto;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -23,6 +24,12 @@ public class MainController {
         while (functionMode != FunctionMode.QUIT) {
             if (functionMode.equals(FunctionMode.PAIR_READ)) {
                 Procedure procedure = inputView.readProcedure();
+                if (pairMatchController.read(procedure) != null) {
+                    RematchConfirm rematchConfirm = inputView.readRematch();
+                    if (rematchConfirm.equals(RematchConfirm.NO)) {
+                        continue;
+                    }
+                }
                 PairsDto read = pairMatchController.read(procedure);
                 outputView.printPairMatchResult(read);
             }

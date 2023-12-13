@@ -13,7 +13,7 @@ public enum RematchConfirm {
         this.code = code;
     }
 
-    public RematchConfirm from(String code) {
+    public static RematchConfirm from(String code) {
         return Arrays.stream(RematchConfirm.values())
                 .filter(rematchConfirm -> rematchConfirm.code.equals(code))
                 .findAny()
