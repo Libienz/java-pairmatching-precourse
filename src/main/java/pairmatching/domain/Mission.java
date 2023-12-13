@@ -1,6 +1,8 @@
 package pairmatching.domain;
 
-import static pairmatching.domain.Level.*;
+import static pairmatching.domain.Level.LEVEL1;
+import static pairmatching.domain.Level.LEVEL2;
+import static pairmatching.domain.Level.LEVEL4;
 
 import java.util.Arrays;
 
@@ -25,8 +27,8 @@ public enum Mission {
 
     public static Mission from(String name, Level level) {
         return Arrays.stream(Mission.values())
-                .filter(name::equals)
-                .filter(level::equals)
+                .filter(mission -> mission.name.equals(name))
+                .filter(mission -> mission.level.equals(level))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_MISSION_MESSAGE));
     }

@@ -15,10 +15,11 @@ public enum Course {
 
     public static Course from(String name) {
         return Arrays.stream(Course.values())
-                .filter(name::equals)
+                .filter(course -> course.name.equals(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_COURSE_MESSAGE));
     }
+
     public String getName() {
         return name;
     }

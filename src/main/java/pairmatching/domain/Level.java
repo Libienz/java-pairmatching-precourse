@@ -18,10 +18,11 @@ public enum Level {
 
     public static Level from(String name) {
         return Arrays.stream(Level.values())
-                .filter(name::equals)
+                .filter(level -> level.name.equals(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_LEVEL_MESSAGE));
     }
+
     public String getName() {
         return name;
     }
