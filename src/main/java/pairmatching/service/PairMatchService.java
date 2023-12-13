@@ -20,9 +20,9 @@ public class PairMatchService {
     }
 
     public PairsDto match(Procedure procedure, List<Crew> crews) {
-        boolean cannotMatch = false;
+        boolean cannotMatch = true;
         List<Pair> pairs = new ArrayList<>();
-        while (!cannotMatch) {
+        while (cannotMatch) {
             List<String> shuffled = Randoms.shuffle(mapToNames(crews));
             pairs = new ArrayList<>();
             for (int i = 0; i + 1 < shuffled.size(); i += 2) {
@@ -34,7 +34,8 @@ public class PairMatchService {
             if (shuffled.size() % 2 == 1) {
                 pairs.get(pairs.size() - 1).addPair(shuffled.get(shuffled.size() - 1));
             }
-            boolean cannotSave = pairs.stream()
+            System.out.println("cannotMatch = " + cannotMatch);
+            cannotMatch = pairs.stream()
                     .anyMatch(pairMatchingRepository::cannotSave);
         }
 
