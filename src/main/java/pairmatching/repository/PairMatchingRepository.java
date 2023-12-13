@@ -11,4 +11,8 @@ public class PairMatchingRepository {
     public Pairs findByProcedure(Procedure procedure) {
         return map.getOrDefault(procedure, null);
     }
+
+    public void savePairs(Procedure procedure, Pairs pairs) {
+        map.put(procedure, pairs);
+    }
 }
