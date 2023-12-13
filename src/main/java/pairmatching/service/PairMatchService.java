@@ -7,10 +7,18 @@ import java.util.stream.Collectors;
 import pairmatching.domain.Crew;
 import pairmatching.domain.Pair;
 import pairmatching.domain.Pairs;
+import pairmatching.domain.Procedure;
+import pairmatching.repository.PairMatchingRepository;
 
 public class PairMatchService {
 
-    public Pairs match(List<Crew> crews) {
+    private final PairMatchingRepository pairMatchingRepository;
+
+    public PairMatchService(PairMatchingRepository pairMatchingRepository) {
+        this.pairMatchingRepository = pairMatchingRepository;
+    }
+
+    public Pairs match(Procedure procedure, List<Crew> crews) {
         List<String> shuffled = Randoms.shuffle(mapToNames(crews));
         List<Pair> pairs = new ArrayList<>();
         for (int i = 0; i + 1 < shuffled.size(); i += 2) {
@@ -22,8 +30,9 @@ public class PairMatchService {
         if (shuffled.size() % 2 == 1) {
             pairs.get(pairs.size() - 1).addPair(shuffled.get(shuffled.size() - 1));
         }
-
-        return new Pairs(pairs);
+        Pairs result = new Pairs(pairs);
+        pairMatchingRepository.savePairs(procedure, result);
+        return result;
     }
 
     private List<String> mapToNames(List<Crew> crews) {
