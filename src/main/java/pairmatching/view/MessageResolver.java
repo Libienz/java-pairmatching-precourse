@@ -34,6 +34,9 @@ public class MessageResolver {
     }
 
     public String resolvePairMatchResultMessage(PairsDto pairsDto) {
+        if (pairsDto == null) {
+            return "[ERROR] 매칭 이력이 없습니다.";
+        }
         StringBuilder message = new StringBuilder("페어 매칭 결과입니다.\n");
 
         List<PairDto> pairs = pairsDto.getPairs();
