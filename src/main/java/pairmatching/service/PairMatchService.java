@@ -20,18 +20,26 @@ public class PairMatchService {
     }
 
     public PairsDto match(Procedure procedure, List<Crew> crews) {
-        List<String> shuffled = Randoms.shuffle(mapToNames(crews));
+        boolean cannotMatch = false;
         List<Pair> pairs = new ArrayList<>();
-        for (int i = 0; i + 1 < shuffled.size(); i += 2) {
-            String crew1 = shuffled.get(i);
-            String crew2 = shuffled.get(i + 1);
-            pairs.add(new Pair(List.of(crew1, crew2)));
+        while (!cannotMatch) {
+            List<String> shuffled = Randoms.shuffle(mapToNames(crews));
+            pairs = new ArrayList<>();
+            for (int i = 0; i + 1 < shuffled.size(); i += 2) {
+                String crew1 = shuffled.get(i);
+                String crew2 = shuffled.get(i + 1);
+                pairs.add(new Pair(List.of(crew1, crew2)));
+            }
+
+            if (shuffled.size() % 2 == 1) {
+                pairs.get(pairs.size() - 1).addPair(shuffled.get(shuffled.size() - 1));
+            }
+            boolean cannotSave = pairs.stream()
+                    .anyMatch(pairMatchingRepository::cannotSave);
         }
 
-        if (shuffled.size() % 2 == 1) {
-            pairs.get(pairs.size() - 1).addPair(shuffled.get(shuffled.size() - 1));
-        }
         Pairs result = new Pairs(pairs);
+        pairMatchingRepository.savePairHistory(result);
         pairMatchingRepository.savePairs(procedure, result);
         return PairsDto.from(result);
     }
