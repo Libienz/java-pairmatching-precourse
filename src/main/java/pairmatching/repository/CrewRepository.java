@@ -1,13 +1,14 @@
 package pairmatching.repository;
 
-import static pairmatching.domain.Course.*;
+import static pairmatching.domain.Course.BACKEND;
+import static pairmatching.domain.Course.FRONTEND;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import pairmatching.domain.Course;
 import pairmatching.domain.Crew;
 
@@ -36,5 +37,11 @@ public class CrewRepository {
         while ((line = br.readLine()) != null) {
             crews.add(new Crew(FRONTEND, line));
         }
+    }
+
+    public List<Crew> findByCourse(Course course) {
+        return crews.stream()
+                .filter(crew -> crew.getCourse().equals(course))
+                .collect(Collectors.toList());
     }
 }
