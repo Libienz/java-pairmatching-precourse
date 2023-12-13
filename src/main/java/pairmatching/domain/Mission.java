@@ -19,4 +19,12 @@ public enum Mission {
         this.name = name;
         this.level = level;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
 }
