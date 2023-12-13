@@ -8,6 +8,7 @@ import pairmatching.domain.Crew;
 import pairmatching.domain.Pair;
 import pairmatching.domain.Pairs;
 import pairmatching.domain.Procedure;
+import pairmatching.dto.PairsDto;
 import pairmatching.repository.PairMatchingRepository;
 
 public class PairMatchService {
@@ -18,7 +19,7 @@ public class PairMatchService {
         this.pairMatchingRepository = pairMatchingRepository;
     }
 
-    public Pairs match(Procedure procedure, List<Crew> crews) {
+    public PairsDto match(Procedure procedure, List<Crew> crews) {
         List<String> shuffled = Randoms.shuffle(mapToNames(crews));
         List<Pair> pairs = new ArrayList<>();
         for (int i = 0; i + 1 < shuffled.size(); i += 2) {
@@ -32,7 +33,7 @@ public class PairMatchService {
         }
         Pairs result = new Pairs(pairs);
         pairMatchingRepository.savePairs(procedure, result);
-        return result;
+        return PairsDto.from(result);
     }
 
     private List<String> mapToNames(List<Crew> crews) {
