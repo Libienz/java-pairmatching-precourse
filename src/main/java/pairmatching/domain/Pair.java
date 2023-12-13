@@ -9,6 +9,10 @@ public class Pair {
         this.pair = pair;
     }
 
+    public List<String> getPair() {
+        return pair;
+    }
+
     public void addPair(String name) {
         pair.add(name);
     }
