@@ -15,4 +15,8 @@ public class PairMatchingRepository {
     public void savePairs(Procedure procedure, Pairs pairs) {
         map.put(procedure, pairs);
     }
+
+    public void resetPairs() {
+        map.clear();
+    }
 }
