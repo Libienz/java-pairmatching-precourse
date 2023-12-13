@@ -17,6 +17,6 @@ public enum RematchConfirm {
         return Arrays.stream(RematchConfirm.values())
                 .filter(rematchConfirm -> rematchConfirm.code.equals(code))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException());
+                .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_CONFIRM_MESSAGE));
     }
 }
