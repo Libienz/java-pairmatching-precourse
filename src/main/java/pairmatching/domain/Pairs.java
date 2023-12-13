@@ -8,4 +8,8 @@ public class Pairs {
     public Pairs(List<Pair> pairs) {
         this.pairs = pairs;
     }
+
+    public List<Pair> getPairs() {
+        return pairs;
+    }
 }
