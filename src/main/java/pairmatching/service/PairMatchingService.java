@@ -10,7 +10,7 @@ import pairmatching.domain.Level;
 import pairmatching.domain.Pair;
 import pairmatching.domain.PairMissionCourse;
 import pairmatching.domain.Pairs;
-import pairmatching.dto.PairsDto;
+import pairmatching.dto.MatchResultDto;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.PairsRepository;
 
@@ -29,7 +29,7 @@ public class PairMatchingService {
         return pairsRepository.findPairsByCourse(pairMissionCourse).isPresent();
     }
 
-    public PairsDto matchPairMatch(PairMissionCourse pairMissionCourse) {
+    public MatchResultDto matchPair(PairMissionCourse pairMissionCourse) {
         List<Crew> crews = crewRepository.findByCourse(pairMissionCourse.getCourse());
         List<String> names = mapToNames(crews);
 
@@ -40,7 +40,7 @@ public class PairMatchingService {
             boolean invalidPair = isInvalidPair(pairs, pairMissionCourse.getLevel());
             if (!invalidPair) {
                 pairsRepository.addPair(pairMissionCourse, pairs);
-                return PairsDto.from(pairs);
+                return MatchResultDto.from(pairs);
             }
             tryCount++;
         }
@@ -63,8 +63,8 @@ public class PairMatchingService {
         return new Pairs(pairs);
     }
 
-    public PairsDto readPair(PairMissionCourse pairMissionCourse) {
-        return PairsDto.from(pairsRepository.findPairsByCourse(pairMissionCourse).get());
+    public MatchResultDto readPair(PairMissionCourse pairMissionCourse) {
+        return MatchResultDto.from(pairsRepository.findPairsByCourse(pairMissionCourse).get());
     }
 
     public void resetPairs() {

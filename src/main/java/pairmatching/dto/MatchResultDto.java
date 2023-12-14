@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import pairmatching.domain.Pairs;
 
-public class PairsDto {
+public class MatchResultDto {
     private final List<PairDto> pairsDto;
 
-    private PairsDto(List<PairDto> pairsDto) {
+    private MatchResultDto(List<PairDto> pairsDto) {
         this.pairsDto = pairsDto;
     }
 
-    public static PairsDto from(Pairs pairs) {
-        return new PairsDto(pairs.getPairs().stream()
+    public static MatchResultDto from(Pairs pairs) {
+        return new MatchResultDto(pairs.getPairs().stream()
                 .map(PairDto::from)
                 .collect(Collectors.toList()));
     }
