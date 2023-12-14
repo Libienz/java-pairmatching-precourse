@@ -39,7 +39,7 @@ public class MainController {
         if (function.equals(PAIR_MATCH)) {
             PairMissionCourse pairMissionCourse = readPairMission();
             if (pairMatchingService.matchExist(pairMissionCourse) && readConfirm().equals(NO)) {
-                return;
+                execFunction(function);
             }
             MatchResultDto matchResultDto = pairMatchingService.matchPair(pairMissionCourse);
             outputView.printPairMatchResult(matchResultDto);
