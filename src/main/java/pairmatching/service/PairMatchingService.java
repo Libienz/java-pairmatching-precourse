@@ -36,17 +36,18 @@ public class PairMatchingService {
         int tryCount = 0;
         while (tryCount < MAX_MATCH_TRY_COUNT) {
             List<String> shuffled = shuffle(names);
-            Pairs pairs = matchPair(shuffled, pairMissionCourse.getCourse());
+            Pairs pairs = linearMatch(shuffled, pairMissionCourse.getCourse());
             boolean invalidPair = isInvalidPair(pairs, pairMissionCourse.getLevel());
             if (!invalidPair) {
                 pairsRepository.addPair(pairMissionCourse, pairs);
                 return PairsDto.from(pairs);
             }
+            tryCount++;
         }
         throw new IllegalArgumentException(PAIR_MATCH_FAIL_MESSAGE);
     }
 
-    public Pairs matchPair(List<String> names, Course course) {
+    public Pairs linearMatch(List<String> names, Course course) {
         List<Pair> pairs = new ArrayList<>();
 
         for (int i = 0; i < names.size(); i += 2) {
