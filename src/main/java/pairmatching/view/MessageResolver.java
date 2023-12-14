@@ -24,10 +24,10 @@ public class MessageResolver {
     }
 
     public String resolveCourseAndMissionMessage() {
-        return "#############################################\n"
+        return "\n#############################################\n"
                 + resolveCourseMessage()
                 + resolveMissionMessage()
-                + "#############################################\n";
+                + "#############################################";
     }
 
     public String resolveInputCourseMessage() {
@@ -47,7 +47,7 @@ public class MessageResolver {
         }
         return readResponseDto.getPairs().stream()
                 .map(this::resolvePairMessage)
-                .collect(Collectors.joining("\n", "페어 매칭 결과입니다.\n", "\n"));
+                .collect(Collectors.joining("\n", "\n페어 매칭 결과입니다.\n", "\n"));
     }
 
     public String resolvePairMatchResultMessage(MatchResultDto matchResultDto) {
