@@ -9,6 +9,9 @@ import pairmatching.domain.Course;
 import pairmatching.domain.Function;
 import pairmatching.domain.Level;
 import pairmatching.domain.Mission;
+import pairmatching.dto.MatchResultDto;
+import pairmatching.dto.PairDto;
+import pairmatching.dto.PairReadResponseDto;
 
 public class MessageResolver {
     private static final String INPUT_FUNCTION_MESSAGE = "기능을 선택하세요.\n";
@@ -33,6 +36,25 @@ public class MessageResolver {
                 .collect(Collectors.joining(" | "));
     }
 
+    public String resolvePairReadMessage(PairReadResponseDto readResponseDto) {
+        if (!readResponseDto.isPairExist()) {
+            return "[ERROR] 매칭 이력이 없습니다.";
+        }
+        return readResponseDto.getPairs().stream()
+                .map(this::resolvePairMessage)
+                .collect(Collectors.joining("페어 매칭 결과입니다.\n", "\n", "\n"));
+    }
+
+    public String resolvePairMatchResultMessage(MatchResultDto matchResultDto) {
+        return matchResultDto.getPairsDto().stream()
+                .map(this::resolvePairMessage)
+                .collect(Collectors.joining("페어 매칭 결과입니다.\n", "\n", "\n"));
+    }
+
+    public String resolvePairResetMessage() {
+        return "초기화 되었습니다.\n";
+    }
+
     private String resolveCourseMessage() {
         return Arrays.stream(Course.values())
                 .map(Course::getName)
@@ -47,5 +69,10 @@ public class MessageResolver {
         return Stream.of(Level.values())
                 .map(level -> "  - " + level.getName() + ": " + missionsByLevel.getOrDefault(level, ""))
                 .collect(Collectors.joining("\n", "미션:\n", "\n"));
+    }
+
+    private String resolvePairMessage(PairDto pairDto) {
+        return pairDto.getCrewNames().stream()
+                .collect(Collectors.joining("", " : ", "\n"));
     }
 }
