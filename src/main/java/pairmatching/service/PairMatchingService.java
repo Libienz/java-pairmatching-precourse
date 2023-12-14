@@ -11,6 +11,8 @@ import pairmatching.domain.Pair;
 import pairmatching.domain.PairMissionCourse;
 import pairmatching.domain.Pairs;
 import pairmatching.dto.MatchResultDto;
+import pairmatching.dto.PairDto;
+import pairmatching.dto.PairReadResponseDto;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.PairsRepository;
 
@@ -63,8 +65,16 @@ public class PairMatchingService {
         return new Pairs(pairs);
     }
 
-    public MatchResultDto readPair(PairMissionCourse pairMissionCourse) {
-        return MatchResultDto.from(pairsRepository.findPairsByCourse(pairMissionCourse).get());
+    public PairReadResponseDto readPair(PairMissionCourse pairMissionCourse) {
+        if (!matchExist(pairMissionCourse)) {
+            return new PairReadResponseDto(false, null);
+        }
+        Pairs pairs = pairsRepository.findPairsByCourse(pairMissionCourse).get();
+        List<PairDto> pairsDto = pairs.getPairs().stream()
+                .map(PairDto::from)
+                .collect(Collectors.toList());
+        return new PairReadResponseDto(true, pairsDto);
+
     }
 
     public void resetPairs() {
