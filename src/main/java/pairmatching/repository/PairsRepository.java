@@ -29,4 +29,8 @@ public class PairsRepository {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
+
+    public void resetPairs() {
+        matchedPairs.clear();
+    }
 }

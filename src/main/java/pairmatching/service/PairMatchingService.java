@@ -63,6 +63,14 @@ public class PairMatchingService {
         return new Pairs(pairs);
     }
 
+    public PairsDto readPair(PairMissionCourse pairMissionCourse) {
+        return PairsDto.from(pairsRepository.findPairsByCourse(pairMissionCourse).get());
+    }
+
+    public void resetPairs() {
+        pairsRepository.resetPairs();
+    }
+
     private List<String> shuffle(List<String> crews) {
         return Randoms.shuffle(crews);
     }
