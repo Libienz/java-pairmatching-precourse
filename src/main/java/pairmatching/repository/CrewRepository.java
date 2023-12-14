@@ -32,9 +32,10 @@ public class CrewRepository {
         saveCrews(frontendCrewNames, Course.FRONTEND);
     }
 
-    private void saveCrews(List<String> backendCrewNames, Course course) {
-        List<Crew> frontendCrews = backendCrewNames.stream()
+    private void saveCrews(List<String> crewNames, Course course) {
+        List<Crew> readCrews = crewNames.stream()
                 .map(name -> new Crew(course, name))
                 .collect(Collectors.toList());
+        crews.addAll(readCrews);
     }
 }
