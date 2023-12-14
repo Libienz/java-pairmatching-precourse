@@ -1,16 +1,20 @@
 package pairmatching.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pair {
-    private final List<Crew> pair;
+    private List<Crew> pair;
 
     private Pair(List<Crew> pair) {
         this.pair = pair;
     }
 
     public static Pair of(Crew crew1, Crew crew2) {
-        return new Pair(List.of(crew1, crew2));
+        List<Crew> crews = new ArrayList<>();
+        crews.add(crew1);
+        crews.add(crew2);
+        return new Pair(crews);
     }
 
     public List<Crew> getPair() {
