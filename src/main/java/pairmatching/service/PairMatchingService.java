@@ -35,9 +35,10 @@ public class PairMatchingService {
         List<Crew> crews = crewRepository.findByCourse(pairMissionCourse.getCourse());
         List<String> names = mapToNames(crews);
 
-        int tryCount = 0;
-        while (tryCount < MAX_MATCH_TRY_COUNT) {
+        int tryCount = 1;
+        while (tryCount <= MAX_MATCH_TRY_COUNT) {
             List<String> shuffled = shuffle(names);
+
             Pairs pairs = linearMatch(shuffled, pairMissionCourse.getCourse());
             boolean invalidPair = isInvalidPair(pairs, pairMissionCourse.getLevel());
             if (!invalidPair) {
@@ -61,7 +62,6 @@ public class PairMatchingService {
             Pair pair = Pair.of(new Crew(course, names.get(i)), new Crew(course, names.get(i + 1)));
             pairs.add(pair);
         }
-
         return new Pairs(pairs);
     }
 
@@ -82,7 +82,8 @@ public class PairMatchingService {
     }
 
     private List<String> shuffle(List<String> crews) {
-        return Randoms.shuffle(crews);
+        List<String> shuffled = Randoms.shuffle(crews);
+        return shuffled;
     }
 
     private List<String> mapToNames(List<Crew> crews) {
@@ -98,9 +99,9 @@ public class PairMatchingService {
                     .map(existPair -> existPair.sameCrewCount(newPair))
                     .anyMatch(sameNumber -> sameNumber > 2);
             if (invalidPair) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
