@@ -20,4 +20,16 @@ public class Pair {
     public boolean addCrew(Crew crew) {
         return pair.add(crew);
     }
+
+    public boolean containCrew(Crew crew) {
+        return pair.stream()
+                .anyMatch(crew::equals);
+    }
+
+    public int sameCrewCount(Pair newPair) {
+        return (int) newPair.getPair().stream()
+                .filter(this.pair::contains)
+                .count();
+    }
+
 }
