@@ -20,9 +20,9 @@ public class InputMapper {
     public PairMissionCourse mapToPairsCourse(String input) {
         String[] split = input.split(PAIR_COURSE_INPUT_DELIMITER);
 
-        Course course = Course.from(split[COURSE_IDX]);
-        Level level = Level.from(split[LEVEL_IDX]);
-        Mission mission = Mission.from(split[MISSION_IDX], level);
+        Course course = Course.from(split[COURSE_IDX].trim());
+        Level level = Level.from(split[LEVEL_IDX].trim());
+        Mission mission = Mission.from(split[MISSION_IDX].trim(), level);
 
         return new PairMissionCourse(course, mission);
     }
