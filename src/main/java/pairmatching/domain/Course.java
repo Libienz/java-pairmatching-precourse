@@ -19,4 +19,8 @@ public enum Course {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_COURSE_MESSAGE));
     }
+
+    public String getName() {
+        return name;
+    }
 }

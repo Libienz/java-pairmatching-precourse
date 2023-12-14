@@ -16,9 +16,17 @@ public enum Confirm {
     }
 
     public static Confirm from(String name) {
-        Arrays.stream(Confirm.values())
+        return Arrays.stream(Confirm.values())
                 .filter(confirm -> confirm.name.equals(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_CONFIRM_MESSAGE));
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
     }
 }

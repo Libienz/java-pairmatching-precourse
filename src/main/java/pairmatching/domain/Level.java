@@ -22,4 +22,8 @@ public enum Level {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NO_SUCH_LEVEL_MESSAGE));
     }
+
+    public String getName() {
+        return name;
+    }
 }
