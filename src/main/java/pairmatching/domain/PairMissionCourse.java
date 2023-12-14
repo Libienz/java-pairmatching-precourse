@@ -2,11 +2,11 @@ package pairmatching.domain;
 
 import java.util.Objects;
 
-public class PairCourse {
+public class PairMissionCourse {
     private final Course course;
     private final Mission mission;
 
-    public PairCourse(Course course, Mission mission) {
+    public PairMissionCourse(Course course, Mission mission) {
         this.course = course;
         this.mission = mission;
     }
@@ -31,7 +31,7 @@ public class PairCourse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PairCourse that = (PairCourse) o;
+        PairMissionCourse that = (PairMissionCourse) o;
         return course.equals(that.course) && mission.equals(that.mission);
     }
 
