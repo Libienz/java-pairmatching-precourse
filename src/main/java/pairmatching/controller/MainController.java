@@ -37,14 +37,16 @@ public class MainController {
 
     public void execFunction(Function function) {
         if (function.equals(PAIR_MATCH)) {
+            outputView.printCourse();
             PairMissionCourse pairMissionCourse = readPairMission();
-            if (pairMatchingService.matchExist(pairMissionCourse) && readConfirm().equals(NO)) {
-                execFunction(function);
+            while (pairMatchingService.matchExist(pairMissionCourse) && readConfirm().equals(NO)) {
+                pairMissionCourse = readPairMission();
             }
             MatchResultDto matchResultDto = pairMatchingService.matchPair(pairMissionCourse);
             outputView.printPairMatchResult(matchResultDto);
         }
         if (function.equals(PAIR_READ)) {
+            outputView.printCourse();
             PairMissionCourse pairMissionCourse = readPairMission();
             PairReadResponseDto pairReadResponseDto = pairMatchingService.readPair(pairMissionCourse);
             outputView.printPairRead(pairReadResponseDto);

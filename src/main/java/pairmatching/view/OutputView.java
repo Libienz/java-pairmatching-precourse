@@ -21,4 +21,8 @@ public class OutputView {
     public void printPairReset() {
         System.out.println(messageResolver.resolvePairResetMessage());
     }
+
+    public void printCourse() {
+        System.out.println(messageResolver.resolveCourseAndMissionMessage());
+    }
 }

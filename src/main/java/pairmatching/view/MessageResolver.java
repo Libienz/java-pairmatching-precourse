@@ -27,8 +27,11 @@ public class MessageResolver {
         return "#############################################\n"
                 + resolveCourseMessage()
                 + resolveMissionMessage()
-                + "#############################################\n"
-                + "과정, 레벨, 미션을 선택하세요.\n"
+                + "#############################################\n";
+    }
+
+    public String resolveInputCourseMessage() {
+        return "과정, 레벨, 미션을 선택하세요.\n"
                 + "ex) 백엔드, 레벨1, 자동차경주";
     }
 

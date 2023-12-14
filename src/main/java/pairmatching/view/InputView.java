@@ -20,7 +20,7 @@ public class InputView {
     }
 
     public PairMissionCourse readPairMissionCourse() {
-        System.out.println(messageResolver.resolveCourseAndMissionMessage());
+        System.out.println(messageResolver.resolveInputCourseMessage());
         return inputMapper.mapToPairsCourse(Console.readLine());
     }
 
