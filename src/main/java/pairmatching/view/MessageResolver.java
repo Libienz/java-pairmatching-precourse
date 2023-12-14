@@ -44,13 +44,13 @@ public class MessageResolver {
         }
         return readResponseDto.getPairs().stream()
                 .map(this::resolvePairMessage)
-                .collect(Collectors.joining("페어 매칭 결과입니다.\n", "\n", "\n"));
+                .collect(Collectors.joining("\n", "페어 매칭 결과입니다.\n", "\n"));
     }
 
     public String resolvePairMatchResultMessage(MatchResultDto matchResultDto) {
         return matchResultDto.getPairsDto().stream()
                 .map(this::resolvePairMessage)
-                .collect(Collectors.joining("페어 매칭 결과입니다.\n", "\n", "\n"));
+                .collect(Collectors.joining("\n", "페어 매칭 결과입니다.\n", "\n"));
     }
 
     public String resolvePairResetMessage() {
@@ -75,6 +75,6 @@ public class MessageResolver {
 
     private String resolvePairMessage(PairDto pairDto) {
         return pairDto.getCrewNames().stream()
-                .collect(Collectors.joining("", " : ", "\n"));
+                .collect(Collectors.joining(" : "));
     }
 }
